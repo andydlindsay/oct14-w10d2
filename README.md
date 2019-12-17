@@ -1,56 +1,10 @@
 # Feature testing with Rails and RSpec
 
-Today we talked about the differences between unit and integration tests (also known as feature tests) and learned how to do it using [RSpec](https://relishapp.com/rspec/rspec-rails/docs) and [Capybara](http://cheatrags.com/capybara). We've expanded on our Bicycles app example from yesterday.
-
-The code discussed in class can be found inside [`/code`](code). Be sure to check out [`/code/spec/features`](code/spec/features).
+Today we talked about integration tests (also known as feature tests) and learned how to do it using [RSpec](https://relishapp.com/rspec/rspec-rails/docs) and [Capybara](http://cheatrags.com/capybara).
 
 I've also included a [Capybara cheatsheet](capybara_cheatsheet.md) with the most common actions.
 
-If you need help setting up your Rails app to run unit and feature tests, [check out yesterday's lecture notes](../w8d1-rails-rspec/README.md).
-
-> **NOTE:** Setting up Capybara can be tricky, so make sure to check the article above. I'm using `chromedriver` to run features tests, but you can also use `phantomjs` as recommended in Compass. [Check the README included with the example code](code/README.md) for more details.
-
-## Extra setup for headless environements to make sure everything is ok
-
-12.Setup for Capybara
-
-12.0. Download chromedriver (optional if it doesn't work) 
-  http://chromedriver.chromium.org/downloads
-  
-  Extract and copy to /usr/local/bin
-  
-12.1. Add the gems in the test group
-
-```ruby
-  gem 'capybara-selenium'
-  gem 'webdrivers', '~> 3.0'
-  gem 'database_cleaner'
-```
-
-12.2. Add to rails_helper
-
-```ruby
-require "selenium/webdriver"
-require 'webdrivers'
-
-Capybara.register_driver :headless_chrome do |app|
-  options = ::Selenium::WebDriver::Chrome::Options.new
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: {'w3c' => false}
-  )
-  options.add_argument('--headless')
-  options.add_argument('--no-sandbox')
-  options.add_argument('--disable-dev-shm-usage')
-  options.add_argument('--window-size=1400,1400')
-
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options, desired_capabilities: capabilities)
-end
-
-Capybara.javascript_driver = :headless_chrome
-```
-
-12.3.Set transactional fixtures to false
-
+> **NOTE:** I'm using `chromedriver` to run features tests, but you can also use `phantomjs` as recommended in Compass.
 
 ## Unit Testing
 
@@ -61,7 +15,7 @@ Capybara.javascript_driver = :headless_chrome
 - Certify that your code behaves as expected
 - Ensure reliability
 - Ensure stability
-- In Rails it usually mean testing the models and business logic in general
+- In Rails it usually means testing the models and business logic in general
 
 **Disadvantages:**
 
@@ -96,8 +50,6 @@ Capybara.javascript_driver = :headless_chrome
   - Dumping out a lot of HTML for debugging
 - More brittle applications are more likely to cause testing problems
 - Harder to write specific test cases
-- Harder to "hide" business-logic layout on page
-
 
 ## Code coverage
 
@@ -133,3 +85,5 @@ Code coverage is a measure of how much of your code is actually tested.
 ## Acknowledgements
 
 Lecture notes heavily based on Don Burks' original notes.
+
+rails generate rspec:feature bicycle
