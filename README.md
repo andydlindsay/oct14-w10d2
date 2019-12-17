@@ -1,10 +1,4 @@
-# Feature testing with Rails and RSpec
-
-Today we talked about integration tests (also known as feature tests) and learned how to do it using [RSpec](https://relishapp.com/rspec/rspec-rails/docs) and [Capybara](http://cheatrags.com/capybara).
-
-I've also included a [Capybara cheatsheet](capybara_cheatsheet.md) with the most common actions.
-
-> **NOTE:** I'm using `chromedriver` to run features tests, but you can also use `phantomjs` as recommended in Compass.
+# W10D2 Feature testing with Rails and RSpec
 
 ## Unit Testing
 
@@ -85,5 +79,3 @@ Code coverage is a measure of how much of your code is actually tested.
 ## Acknowledgements
 
 Lecture notes heavily based on Don Burks' original notes.
-
-rails generate rspec:feature bicycle
